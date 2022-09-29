@@ -1,0 +1,1 @@
+package gosuapiclient_test
