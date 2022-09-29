@@ -4,9 +4,9 @@ This projects aims to easily provide a client for the [osu!api v2](https://osu.p
 
 ## Installation
     
-    ```bash
-    go get -u github.com/maxkruse/gosu-api-client
-    ```
+```sh
+go get -u github.com/maxkruse/gosu-api-client
+```
 
 ## Usage
 
