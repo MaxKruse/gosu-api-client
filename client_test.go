@@ -42,6 +42,27 @@ func TestGetBeatmap(t *testing.T) {
 	if res.DifficultyRating <= 7.09 || res.DifficultyRating >= 7.11 {
 		t.Error("Difficulty rating is not 7.1, but " + strconv.FormatFloat(res.DifficultyRating, 'f', 1, 64))
 	}
+
+	res, err = client.GetBeatmap(1754777)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+
+	if res.ID != 1754777 {
+		t.Error("ID is not 1754777, but " + strconv.Itoa(res.ID))
+	}
+
+	res, err = client.GetBeatmap(147406)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+
+	// make sure the availability is false
+	if !res.Beatmapset.Availability.DownloadDisabled {
+		t.Error("Download is enabled, but should be disabled")
+	}
 }
 
 func TestGetBeatmapWithMods(t *testing.T) {

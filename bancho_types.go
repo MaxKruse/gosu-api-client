@@ -45,7 +45,7 @@ type Covers struct {
 	Slimcover2X string `json:"slimcover@2x"`
 }
 type Availability struct {
-	DownloadDisabled int         `json:"download_disabled"`
+	DownloadDisabled bool        `json:"download_disabled"`
 	MoreInformation  interface{} `json:"more_information"`
 }
 type NominationsSummary struct {
