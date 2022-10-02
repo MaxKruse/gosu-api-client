@@ -9,6 +9,9 @@ import (
 )
 
 func (c Client) GetBeatmap(mapID uint) (BeatmapObject, error) {
+	// Respect the ratelimit!
+	c.rateLimiter.Take()
+
 	var beatmap BeatmapObject
 	resp, err := c.authenticatedClient.Get(BASE_URL + "/beatmaps/" + strconv.Itoa(int(mapID)))
 	if err != nil {
@@ -32,6 +35,9 @@ func (c Client) GetBeatmap(mapID uint) (BeatmapObject, error) {
 }
 
 func (c Client) GetBeatmapWithMods(mapId uint, ruleset string, mods int64) (DifficultyAttribute, error) {
+	// Respect the ratelimit!
+	c.rateLimiter.Take()
+
 	var difficulty DifficultyAttribute
 	// we need to format the ruleset and mods into a json object in the format
 	// {"ruleset": "osu", "mods": 72}

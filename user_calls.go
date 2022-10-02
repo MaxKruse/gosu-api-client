@@ -142,6 +142,9 @@ type RankHistory struct {
 }
 
 func (c Client) GetUserFromUsername(username string) (UserObject, error) {
+	// Respect the ratelimit!
+	c.rateLimiter.Take()
+
 	var user UserObject
 	endpoint := BASE_URL + "/users/" + username + "/osu?key=username"
 	resp, err := c.authenticatedClient.Get(endpoint)
@@ -166,6 +169,9 @@ func (c Client) GetUserFromUsername(username string) (UserObject, error) {
 }
 
 func (c Client) GetUserFromID(id int) (UserObject, error) {
+	// Respect the ratelimit!
+	c.rateLimiter.Take()
+
 	var user UserObject
 	resp, err := c.authenticatedClient.Get(BASE_URL + "/users/" + strconv.Itoa(id))
 	if err != nil {
